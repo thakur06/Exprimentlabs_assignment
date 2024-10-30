@@ -11,6 +11,7 @@ export default function Day({ day, rowIdx }) {
     filteredEvents,
     setSelectedEvent,
     setDate,
+    login,
     showEventModal,
   } = useContext(GlobalContext);
 
@@ -32,6 +33,9 @@ export default function Day({ day, rowIdx }) {
       <div
         className="flex-1 cursor-pointer text-center text-emerald-800"
         onClick={() => {
+          if(!login){
+            alert("Please login to add events/meetings");
+          }
           setDaySelected(day);
           setShowEventModal(true);
         }}

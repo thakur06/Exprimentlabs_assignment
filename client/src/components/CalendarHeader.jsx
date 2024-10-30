@@ -7,7 +7,7 @@ import { auth, signInWithPopup, provider } from "../utils/auth";
 
 export default function CalendarHeader() {
   const [googleuser, setgoogleuser] = useState("");
-  const { monthIndex, setMonthIndex, setuser, setLogin,setShowEventModal } = useContext(GlobalContext);
+  const { monthIndex, setMonthIndex, setuser, setLogin,setShowEventModal,login,user } = useContext(GlobalContext);
 
   const headers = {
     "Content-Type": "application/json",
@@ -94,9 +94,12 @@ export default function CalendarHeader() {
           {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
         </h2>
       </header>
-      <button onClick={googleLogin} className="p-4">
+      {!login &&<button onClick={googleLogin} className="p-4">
         Login with Google
-      </button>
+      </button>}
+      {
+        login && <h1 className="p-7" >{user.name} </h1>
+      }
     </div>
   );
 }
