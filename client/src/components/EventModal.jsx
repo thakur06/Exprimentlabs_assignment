@@ -25,7 +25,7 @@ export default function EventModal() {
     // Prevent the default form submission behavior
     e.preventDefault();
 
- 
+    const uuid = uuidv4();
     let hash = 0;
 
     // Create a hash from the UUID string
