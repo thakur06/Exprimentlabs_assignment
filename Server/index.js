@@ -173,21 +173,26 @@ app.post("/login", async (req, res) => {
     res.send("tested endpoint");
 });
 app.post("/addevent", async (req, res) => {
+    console.log(req.body)
     const { eventId,email, title, date, time, description } = req.body;
     addEvent( eventId,email, title, date, time, description);
     res.send("tested event endpoint");
 });
 app.post("/fetchevent", async (req, res) => {
     const { email } = req.body;
-   fetchEvents(email);
-    res.send("tested fetch endpoint");
+    console.log(email)
+   const response=await fetchEvents(email);
+   console.log(response)
+    res.json(response);
 });
 app.post("/updateevent", async (req, res) => {
+    console.log(req.body)
     const { email, eventId, title, date, time, description} = req.body;
     updateEvent(email, eventId, title, date, time, description);
-    res.send("tested endpoint");
+    res.send("tested update endpoint");
 });
 app.post("/deleteevent", async (req, res) => {
+    console.log("i am delete event "+req.body)
     const { email, eventId } = req.body;
     deleteEvent(email, eventId);
     res.send("tested endpoint");

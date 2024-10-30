@@ -1,8 +1,8 @@
-import React,{useContext} from "react";
+import React,{useContext,useState,useEffect} from "react";
 import Day from "./Day";
 import EventModal from "./EventModal";
 import GlobalContext from "../context/GlobalContext";
-import AllEvents from "./AllEvents";
+import { auth } from "../utils/auth";
 export default function Month({ month }) {
   const {
     showAllEvents,
@@ -12,8 +12,11 @@ export default function Month({ month }) {
     daySelected,
     dispatchCalEvent,
     selectedEvent,
+    user,
+    login
   } = useContext(GlobalContext);
 
+  const canShowEventModal = showEventModal && login;
   return (
     <>
     <div className="flex-1 grid grid-cols-7 grid-rows-5">
@@ -25,11 +28,9 @@ export default function Month({ month }) {
         </React.Fragment>
       ))}
     </div>
-    {showEventModal && <EventModal/>}
+    {canShowEventModal && <EventModal/>}
    
-        {/* { showAllEvents &&
-          <AllEvents/>
-        } */}
+  
     </>
   );
 }

@@ -6,10 +6,10 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-export default function EventModal() {
+export default function UpdateEvent({ updateId }) {
   const {
-    showEventModal,
-    setShowEventModal,
+    showAllEvents,
+    setShowAllEvents,
     daySelected,
     user,
     setLocator,
@@ -21,55 +21,52 @@ export default function EventModal() {
   const [description, setDescription] = useState("");
   const [time, setTime] = useState("");
   const [date, setDate] = useState(eventdate);
-  const addevent = async (e) => {
+  const updateEvent = async (event) => {
     // Prevent the default form submission behavior
-    e.preventDefault();
-
-    const id = Math.ceil(Math.random(1,147,483,647) * 10);
+    event.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:2000/addevent",
-        {
-          eventId: id,
-          email: user.email,
-          title: title,
-          date: date,
-          time: time,
-          description: description,
-        },
-        { headers }
-      );
+      const response = await axios.post("http://localhost:2000/updateevent", {
+        eventId: updateId,
+        email: user.email,
+        title: title,
+        date: date,
+        time: time,
+        description: description,
+      }, { headers });
 
-      // Update the locator state and close the modal
-      setLocator(!locator);
-      setShowEventModal(false);
       console.log(response.data);
+      setShowAllEvents(false);
+setLocator(!locator)
+      // You can also handle additional logic after updating the event here
     } catch (error) {
-      console.error("Error adding event:", error);
+      console.error("Error while updating event:", error);
     }
   };
 
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-      <form className="bg-white rounded-lg shadow-2xl w-1/4" onSubmit={addevent}>
-        <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
-          <div>
+      <form className="bg-white rounded-lg shadow-2xl w-1/4" onSubmit={updateEvent}>
+        <header className="bg-gray-100 px-4 py-2 flex justify-between ">
+          <div className="flex flex-row justify-between items-center">
+            <div>
             <button
-              type="button" // Change type to "button" to prevent form submission
-              onClick={() => {
-                setShowEventModal(false);
-              }}
+              type="button"
+              onClick={() => setShowAllEvents(false)}
             >
               <span className="material-icons-outlined font-semibold text-3xl text-red-600">
                 X
               </span>
-            </button>
+            </button></div>
+           
           </div>
         </header>
         <div className="p-3">
           <div className="grid grid-cols-1/5 items-end gap-y-7">
-          <div className="text-center text-gray-600 font-semibold text-3xl">Create event</div>
+          <div className="text-center text-gray-600 font-semibold text-3xl">Update event</div>
+            <div>
+
+            </div>
             <input
               type="text"
               name="title"
@@ -79,8 +76,8 @@ export default function EventModal() {
               className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
               onChange={(e) => setTitle(e.target.value)}
             />
-
-        
+            
+           
             <input
               type="date"
               name="description"
@@ -90,6 +87,7 @@ export default function EventModal() {
               className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
               onChange={(e) => setDate(e.target.value)}
             />
+            
             <input
               type="text"
               name="description"
@@ -99,7 +97,7 @@ export default function EventModal() {
               className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
               onChange={(e) => setDescription(e.target.value)}
             />
-
+            
             <input
               type="text"
               name="time"
@@ -116,7 +114,7 @@ export default function EventModal() {
             type="submit"
             className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
           >
-            Save
+            Update Event
           </button>
         </footer>
       </form>

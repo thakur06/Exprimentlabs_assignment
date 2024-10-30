@@ -5,18 +5,19 @@ import Sidebar from "./components/Sidebar"
 import { getMonth } from "./utils/cal";
 import GlobalContext from "./context/GlobalContext";
 function App() {
-  const {monthIndex}=useContext(GlobalContext);
+  const {monthIndex,locator}=useContext(GlobalContext);
+
 const [currMonth, setcurrMonth] = useState(getMonth());
 useEffect(() => {
+
   setcurrMonth(getMonth(monthIndex));
-console.log(import.meta.env.VITE_TEST)
 }, [monthIndex])
 
   return <>
   <div className="flex flex-col">
-  <CalendarHeader/>
+  <CalendarHeader />
     <div className="flex flex-1">
-     <Sidebar/>
+     <Sidebar />
       <Month month={currMonth}/>
     </div>
   </div>

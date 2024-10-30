@@ -4,25 +4,50 @@ import React, { useContext, useState } from "react";
 import logo from "../assets/image.png";
 import GlobalContext from "../context/GlobalContext";
 import { auth, signInWithPopup, provider } from "../utils/auth";
+
 export default function CalendarHeader() {
   const [googleuser, setgoogleuser] = useState("");
-  const { monthIndex, setMonthIndex } = useContext(GlobalContext);
+  const { monthIndex, setMonthIndex, setuser, setLogin,setShowEventModal } = useContext(GlobalContext);
+
   const headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
-  const userLogin = async() => {
-    axios.post("http://localhost:2000/login",{name:"abhishek",email:"test@email.com",photo:"https://www.freepik.com/free-photos-vectors/man-profile-pic"},{headers}).then(res=>console.log(res)).catch(err=>console.error(err));
+
+  const userLogin = async () => {
+    try {
+      // await axios.post(
+      //   "http://localhost:2000/login",
+      //   {
+      //     name: googleuser.displayName,
+      //     email: "t@t.com",
+      //     photo: googleuser.photoURL,
+      //   },
+      //   { headers }
+      // );
+      console.log("User login successful");
+      setLogin(true);
+      setShowEventModal(false);
+       // Updates context login status
+    } catch (err) {
+      console.error("Error logging in user:", err);
+    }
   };
+
   const googleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      setgoogleuser(user.__UserImpl);
-      console.log("User Info:", user);
-userLogin();
+      const guser = result.user;
+      setgoogleuser(guser);
 
-      // Display user information or redirect
-      alert(`Welcome ${user.displayName}`);
+      // Update user in context
+      setuser({
+        name: guser.displayName,
+        email: guser.email,
+        photo: guser.photoURL,
+      });
+
+      // Call userLogin to save to the database and set login status
+      userLogin();
     } catch (error) {
       console.error("Error during login", error);
       alert("Failed to login. Please try again.");
@@ -32,21 +57,22 @@ userLogin();
   function handlePrevMonth() {
     setMonthIndex(monthIndex - 1);
   }
+
   function handleNextMonth() {
     setMonthIndex(monthIndex + 1);
   }
+
   function handleReset() {
     setMonthIndex(
-      monthIndex === dayjs().month()
-        ? monthIndex + Math.random()
-        : dayjs().month()
+      monthIndex === dayjs().month() ? monthIndex + Math.random() : dayjs().month()
     );
   }
+
   return (
     <div className="flex flex-row justify-between">
       <header className="px-4 py-2 flex items-center">
         <img src={logo} alt="calendar" className="mr-2 w-12 h-12" />
-        <h1 className="mr-10 text-xl text-gray-500 fond-bold">Calendar</h1>
+        <h1 className="mr-10 text-xl text-gray-500 font-bold">Calendar</h1>
         <button onClick={handleReset} className="border rounded py-2 px-4 mr-5">
           Today
         </button>
@@ -68,7 +94,9 @@ userLogin();
           {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
         </h2>
       </header>
-      <button onClick={googleLogin} className="p-4">login with google</button>
+      <button onClick={googleLogin} className="p-4">
+        Login with Google
+      </button>
     </div>
   );
 }

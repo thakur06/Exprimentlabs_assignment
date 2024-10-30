@@ -1,5 +1,5 @@
 import React from "react";
-
+import dayjs from "dayjs";
 const GlobalContext = React.createContext({
   monthIndex: 0,
   setMonthIndex: (index) => {},
@@ -11,14 +11,18 @@ const GlobalContext = React.createContext({
   setShowEventModal: () => {},
   showAllEvents: false,
   setShowAllEvents: () => {},
-  dispatchCalEvent: ({ type, payload }) => {},
-  savedEvents: [],
-  selectedEvent: null,
-  setSelectedEvent: () => {},
-  setLabels: () => {},
-  labels: [],
   updateLabel: () => {},
   filteredEvents: [],
+  user: {},
+  setuser: () => {},
+  login: false,
+  setLogin: () => {},
+  date:null,
+  setDate: () => {},
+  locator:false,
+  setLocator:()=>{},
+  allevent: 1,
+  setalleventtype: (index) => {},
 });
 
 export default GlobalContext;
