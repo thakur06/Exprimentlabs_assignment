@@ -29,7 +29,7 @@ export default function EventModal() {
 
     try {
       const response = await axios.post(
-        "http://localhost:2000/addevent",
+        "https://exprimentlabs-assignment-server.vercel.app//addevent",
         {
           eventId: id,
           email: user.email,

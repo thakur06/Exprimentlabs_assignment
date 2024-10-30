@@ -26,7 +26,7 @@ export default function UpdateEvent({ updateId }) {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:2000/updateevent", {
+      const response = await axios.post("https://exprimentlabs-assignment-server.vercel.app//updateevent", {
         eventId: updateId,
         email: user.email,
         title: title,
