@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 import axios from "axios";
-
+import { v4 as uuidv4 } from 'uuid';
 const headers = {
   "Content-Type": "application/json",
 };
@@ -25,8 +25,16 @@ export default function EventModal() {
     // Prevent the default form submission behavior
     e.preventDefault();
 
-    const id = Math.ceil(Math.random(1,147,483,647) * 10);
+ 
+    let hash = 0;
 
+    // Create a hash from the UUID string
+    for (let i = 0; i < uuid.length; i++) {
+        hash = (hash << 5) - hash + uuid.charCodeAt(i); // Use bitwise operations for hashing
+        hash |= 0; // Convert to 32-bit integer
+    }
+  
+    const id=Math.abs(hash)
     try {
       const response = await axios.post(
         "https://server-sigma-liard.vercel.app/addevent",
