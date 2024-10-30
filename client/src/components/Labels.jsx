@@ -26,7 +26,7 @@ export default function Labels() {
       try {
         await axios
           .post(
-            "https://exprimentlabs-assignment-server.vercel.app/fetchevent",
+            "https://server-sigma-liard.vercel.app/fetchevent",
             { email: user.email },
             { headers }
           )
@@ -45,7 +45,7 @@ export default function Labels() {
     try {
       await axios
         .post(
-          "https://exprimentlabs-assignment-server.vercel.app/deleteevent",
+          "https://server-sigma-liard.vercel.app/deleteevent",
 
           { email: user.email, eventId: eventId },
           { headers }
