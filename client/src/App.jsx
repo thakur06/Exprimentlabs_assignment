@@ -9,7 +9,7 @@ function App() {
 const [currMonth, setcurrMonth] = useState(getMonth());
 useEffect(() => {
   setcurrMonth(getMonth(monthIndex));
-
+console.log(import.meta.env.VITE_TEST)
 }, [monthIndex])
 
   return <>

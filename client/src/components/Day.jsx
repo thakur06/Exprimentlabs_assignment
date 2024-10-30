@@ -1,12 +1,16 @@
 import dayjs from "dayjs";
 import React, { useContext, useState, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
+import AllEvents from "./AllEvents";
 
 export default function Day({ day, rowIdx }) {
+
   const [dayEvents, setDayEvents] = useState([]);
   const {
     setDaySelected,
     setShowEventModal,
+    setShowAllEvents,
+    showAllEvents,
     filteredEvents,
     setSelectedEvent,
   } = useContext(GlobalContext);
@@ -44,17 +48,10 @@ export default function Day({ day, rowIdx }) {
           setDaySelected(day);
           setShowEventModal(true);
         }}
-      >
-        {dayEvents.map((evt, idx) => (
-          <div
-            key={idx}
-            onClick={() => setSelectedEvent(evt)}
-            className={`bg-${evt.label}-200 p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
-          >
-            {evt.title}
-          </div>
-        ))}
-      </div>
+      ></div>
+ 
+ <button className="" onClick={()=>{ setShowEventModal(false); setShowAllEvents(true);}}>Events</button>
+      
     </div>
   );
 }

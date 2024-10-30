@@ -2,23 +2,15 @@ import React, { useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
 
 export default function Labels() {
-  const { labels, updateLabel } = useContext(GlobalContext);
+  var numberArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
   return (
     <React.Fragment>
       <p className="text-gray-500 font-bold mt-10">Label</p>
-      {labels.map(({ label: lbl, checked }, idx) => (
-        <label key={idx} className="items-center mt-3 block">
-          <input
-            type="checkbox"
-            checked={checked}
-            onChange={() =>
-              updateLabel({ label: lbl, checked: !checked })
-            }
-            className={`form-checkbox h-5 w-5 text-${lbl}-400 rounded focus:ring-0 cursor-pointer`}
-          />
-          <span className="ml-2 text-gray-700 capitalize">{lbl}</span>
-        </label>
+    <div className="h-[11.5rem] overflow-y-scroll">
+      {numberArray.map((data)=>(
+        <li>{data}</li>
       ))}
+    </div>
     </React.Fragment>
   );
 }
