@@ -137,75 +137,75 @@ export default function Labels() {
       <div className="h-[11.5rem] overflow-y-scroll">
         {allevent === 1 &&
           tasks.map((task, idx) => (
-            <div
+            <div className="border border-gray-500 p-3 mt-3"
               key={task.id}
               onClick={() => {
                 setShowAllEvents(true);
                 setupdateId(task.id);
               }}
             >
-              <li>{task.title}</li>
-              <li>{task.date}</li>
-              <li>{task.description}</li>
+                 <li className="font-bold text-black">{task.title}</li>
+              <li className="ml-6 text-green-700">{task.date}</li>
+              <li className="mb-3 ml-8 text-orange-700">{task.description}</li>
               <span
-                className="text-red-700 font-extrabold cursor-pointer"
+                className="border border-red-700 p-1 bg-red-700 text-white rounded-lg  cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevents triggering the parent div's onClick
                   deleteEvent(task.id, user.email);
                   setLocator(!locator);
                 }}
               >
-                X
+                delete event
               </span>
             </div>
           ))}
 
         {allevent === 2 &&
           filteredTasksMonth.map((task, idx) => (
-            <div
+            <div className="border border-gray-500 p-3 mt-3"
               key={task.id}
               onClick={() => {
                 setShowAllEvents(true);
                 setupdateId(task.id);
               }}
             >
-              <li>{task.title}</li>
-              <li>{task.date}</li>
-              <li>{task.description}</li>
+                     <li className="font-bold text-black">{task.title}</li>
+              <li className="ml-6 text-green-700">{task.date}</li>
+              <li className="ml-8 text-orange-700 mb-3">{task.description}</li>
               <span
-                className="text-red-700 font-extrabold cursor-pointer"
+                className="border border-red-700 p-1 bg-red-700 text-white rounded-lg  cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevents triggering the parent div's onClick
                   deleteEvent(task.id, user.email);
                   setLocator(!locator);
                 }}
               >
-                X
+                delete event
               </span>
             </div>
           ))}
 
         {allevent === 3 &&
           filteredTasksWeek.map((task, idx) => (
-            <div
+            <div className="border border-gray-500 p-3 mt-3"
               key={task.id}
               onClick={() => {
                 setShowAllEvents(true);
                 setupdateId(task.id);
               }}
             >
-              <li>{task.title}</li>
-              <li>{task.date}</li>
-              <li>{task.description}</li>
+            <li className="font-bold text-black">{task.title}</li>
+              <li className="ml-6 text-green-700">{task.date}</li>
+              <li className="ml-8 mb-3 text-orange-700">{task.description}</li>
               <span
-                className="text-red-700 font-extrabold cursor-pointer"
+                className="border border-red-700 p-1 bg-red-700 text-white rounded-lg  cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevents triggering the parent div's onClick
                   deleteEvent(task.id, user.email);
                   setLocator(!locator);
                 }}
               >
-                X
+               delete event
               </span>
             </div>
           ))}

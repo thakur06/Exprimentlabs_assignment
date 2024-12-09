@@ -95,7 +95,7 @@ export default function CalendarHeader() {
         </h2>
       </header>
       {!login &&<button onClick={googleLogin} className="p-4">
-        Login with Google
+        <span className="border rounded-lg p-3 border-green-500">Login with Google</span>
       </button>}
       {
         login && <h1 className="p-7" >{user.name} </h1>

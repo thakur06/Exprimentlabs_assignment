@@ -6,6 +6,7 @@ export default function Sidebar() {
       <aside className="border p-5 w-64">
         <CreateEventButton />
         <SmallCalendar />
+        <hr/>
         <Labels />
       </aside>
     );
