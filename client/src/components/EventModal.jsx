@@ -52,7 +52,10 @@ export default function EventModal() {
       // Update the locator state and close the modal
       setLocator(!locator);
       setShowEventModal(false);
-      console.log(response.data);
+     
+      alert("Event added successfully . You will receive reminder email 8 hours before the event");
+
+      
     } catch (error) {
       console.error("Error adding event:", error);
     }
